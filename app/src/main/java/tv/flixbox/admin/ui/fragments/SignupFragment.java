@@ -13,25 +13,19 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import tv.flixbox.admin.FApplication;
 import tv.flixbox.admin.R;
-import tv.flixbox.admin.libs.fengine.FRequest;
-import tv.flixbox.admin.libs.fengine.FResponse;
-import tv.flixbox.admin.libs.fengine.FSocket;
-import tv.flixbox.admin.libs.fengine.FSocketCallback;
-import tv.flixbox.admin.libs.fengine.headers.RequestHeaders;
+import tv.flixbox.admin.handler.calls.ResponseCallback;
+import tv.flixbox.admin.handler.calls.SignCall;
+import tv.flixbox.admin.libs.json.variables.JsonObject;
+import tv.flixbox.admin.libs.json.variables.JsonVariable;
 import tv.flixbox.admin.ui.MainActivity;
 import tv.flixbox.admin.ui.views.FAppCompatActivity;
 
-public class SignupFragment extends Fragment {
+public class SignupFragment extends Fragment implements ResponseCallback {
 
     private boolean isLoading;
     private Handler handler;
+    private SignCall call;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -72,7 +66,11 @@ public class SignupFragment extends Fragment {
                     return;
                 }
 
-                call(("fname="+firstName.getText().toString()+
+                if(call == null){
+                    call = new SignCall(getContext(), SignupFragment.this);
+                }
+
+                call.request("signup", ("fname="+firstName.getText().toString()+
                         "&lname="+lastName.getText().toString()+
                         "&email="+email.getText().toString()+
                         "&pwd="+password.getText().toString()+
@@ -87,64 +85,27 @@ public class SignupFragment extends Fragment {
         response.setVisibility(View.VISIBLE);
     }
 
-    private void call(byte[] post){
-        isLoading = true;
-        String uri = getString(R.string.api_uri)+"signup";
-
-        FSocket socket = new FSocket(getContext(), uri, new FSocketCallback(){
+    @Override
+    public void onSuccessResponse(JsonVariable j){
+        handler.post(new Runnable(){
             @Override
-            public void onRequest(FRequest request, OutputStream out)throws Exception {
-                out.write(post);
-                out.flush();
-            }
-
-            @Override
-            public void onResponse(FRequest request, FResponse response, InputStream in)throws Exception {
-                if(response.getStatusCode() == 200){
-                    StringBuilder b = new StringBuilder();
-
-                    byte[] buf = new byte[4096];
-                    int l;
-                    while((l = in.read(buf)) > 0){
-                        b.append(new String(buf, 0, l));
-                    }
-
-                    JSONObject j = new JSONObject(b.toString());
-
-                    switch(j.getInt("type")){
-                        case 0:
-                            handler.post(new Runnable(){
-                                @Override
-                                public void run(){
-                                    isLoading = false;
-                                    ((FAppCompatActivity) getActivity()).getActivityResultLauncher().launch(new Intent(getActivity(), MainActivity.class));
-                                    getActivity().finish();
-                                    getActivity().overridePendingTransition(0, 0);
-                                }
-                            });
-                            break;
-
-                        default:
-                            throw new Exception(j.getJSONObject("result").getString("message"));
-                    }
-                }
-            }
-
-            @Override
-            public void onException(Exception e){
-                e.printStackTrace();
+            public void run(){
                 isLoading = false;
-                handler.post(new Runnable(){
-                    @Override
-                    public void run(){
-                        setResponse(e.getMessage());
-                    }
-                });
+                ((FAppCompatActivity) getActivity()).getActivityResultLauncher().launch(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
+                getActivity().overridePendingTransition(0, 0);
             }
         });
-        socket.getRequest().setMethod(RequestHeaders.Method.POST);
-        socket.getRequest().addHeader("Content-Length", post.length+"");
-        socket.async(((FApplication) getContext().getApplicationContext()).getExecutor());
+    }
+
+    @Override
+    public void onErrorResponse(JsonObject j){
+        handler.post(new Runnable(){
+            @Override
+            public void run(){
+                setResponse(j.getJsonObject("result").getString("message"));
+            }
+        });
     }
 
     @Override

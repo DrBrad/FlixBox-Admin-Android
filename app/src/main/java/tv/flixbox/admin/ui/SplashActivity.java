@@ -1,6 +1,6 @@
 package tv.flixbox.admin.ui;
 
-import static tv.flixbox.admin.handlers.User.isSignedIn;
+import static tv.flixbox.admin.handler.User.isSignedIn;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimatedVectorDrawable;

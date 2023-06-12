@@ -1,4 +1,4 @@
-package tv.flixbox.admin.handlers;
+package tv.flixbox.admin.handler;
 
 import android.content.Context;
 import android.util.Base64;
