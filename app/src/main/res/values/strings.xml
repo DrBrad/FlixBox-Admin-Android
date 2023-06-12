@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FlixBox Admin</string>
+    <string name="api_uri">https://flixbox.tv/api/v2/</string>
+    <string name="image_uri">https://flixbox.tv/image/</string>
+    <string name="subtitle_uri">https://flixbox.tv/subtitle/</string>
+    <string name="video_uri">https://flixbox.tv/video?v=</string>
+    <string name="trailer_uri">https://flixbox.tv/trailer?v=</string>
+    <string name="update_uri">https://flixbox.tv/apk</string>
+
+    <string name="cast_id">B16B34D9</string>
+
+    <string name="mapbox_token">YOUR_MAPBOX_ACCESS_TOKEN</string>
+</resources>
