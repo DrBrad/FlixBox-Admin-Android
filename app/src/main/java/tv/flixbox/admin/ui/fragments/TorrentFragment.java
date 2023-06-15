@@ -7,16 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import tv.flixbox.admin.R;
-import tv.flixbox.admin.handler.RPCStatus;
 import tv.flixbox.admin.handler.calls.TorrentCall;
 import tv.flixbox.admin.handler.calls.ResponseCallback;
-import tv.flixbox.admin.libs.json.variables.JsonArray;
 import tv.flixbox.admin.libs.json.variables.JsonObject;
 import tv.flixbox.admin.libs.json.variables.JsonVariable;
 import tv.flixbox.admin.ui.adapters.TorrentAdapter;
