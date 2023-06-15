@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FlixBox Admin</string>
     <string name="api_uri">https://flixbox.tv/api/v2/</string>
+    <string name="admin_api_uri">https://flixbox.tv/admin/api/v1/</string>
     <string name="image_uri">https://flixbox.tv/image/</string>
     <string name="subtitle_uri">https://flixbox.tv/subtitle/</string>
     <string name="video_uri">https://flixbox.tv/video?v=</string>

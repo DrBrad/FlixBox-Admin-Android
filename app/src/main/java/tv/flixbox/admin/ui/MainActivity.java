@@ -8,8 +8,10 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.fragment.app.FragmentTransaction;
 
 import tv.flixbox.admin.R;
+import tv.flixbox.admin.ui.fragments.TorrentFragment;
 import tv.flixbox.admin.ui.views.FAppCompatActivity;
 
 public class MainActivity extends FAppCompatActivity {
@@ -24,6 +26,10 @@ public class MainActivity extends FAppCompatActivity {
         AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
         am.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container, new TorrentFragment(), "Home");
+        //transaction.addToBackStack("Home");
+        transaction.commit();
     }
 
     @Override

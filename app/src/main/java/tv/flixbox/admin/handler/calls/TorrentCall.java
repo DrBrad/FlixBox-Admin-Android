@@ -23,8 +23,8 @@ public class TorrentCall extends FSocketCallback {
         this.callback = callback;
     }
 
-    public void request(int n){
-        String uri = context.getString(R.string.api_uri)+"list?a="+n;
+    public void request(){
+        String uri = context.getString(R.string.admin_api_uri)+"torrents";
 
         new FSocket(context, uri, this).async(((FApplication) context.getApplicationContext()).getExecutor(), 2);
     }
@@ -37,7 +37,7 @@ public class TorrentCall extends FSocketCallback {
 
             switch(j.getInteger("type")){
                 case 0:
-                    callback.onSuccessResponse(j.getJsonArray("result"));
+                    callback.onSuccessResponse(j.getJsonObject("result"));
                     break;
 
                 default:

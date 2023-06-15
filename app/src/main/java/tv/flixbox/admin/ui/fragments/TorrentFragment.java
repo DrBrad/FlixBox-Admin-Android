@@ -2,6 +2,7 @@ package tv.flixbox.admin.ui.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class TorrentFragment extends Fragment implements ResponseCallback {
         });
         */
 
-        call.request(0);
+        call.request();
     }
 
     @Override
@@ -77,7 +78,8 @@ public class TorrentFragment extends Fragment implements ResponseCallback {
         handler.post(new Runnable(){
             @Override
             public void run(){
-                ((TorrentAdapter) listView.getAdapter()).append((JsonArray) j);
+                Log.e("info", j.toString());
+                ((TorrentAdapter) listView.getAdapter()).setJson(((JsonObject) j).getJsonArray("torrents"));
 
                 /*
                 View loader = getView().findViewById(R.id.loader);
@@ -95,12 +97,14 @@ public class TorrentFragment extends Fragment implements ResponseCallback {
     public void onErrorResponse(JsonObject j){
         switch(j.getInteger("type")){
             case 1:
+                /*
                 handler.post(new Runnable(){
                     @Override
                     public void run(){
-                        ((TorrentAdapter) listView.getAdapter()).stopShimmer();
+                        //((TorrentAdapter) listView.getAdapter()).stopShimmer();
                     }
                 });
+                */
                 break;
 
             case 2:
