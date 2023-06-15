@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?selectableItemBackground"
+    android:padding="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="jackdaniels@gmail.com" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        tools:text="Jack Daniels"
+        android:layout_marginTop="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/role"
+            android:textColor="@color/background"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:background="@drawable/background_status_downloading"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="2dp"
+            tools:text="No Access" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/date"
+            android:textSize="12sp"
+            tools:text="Feb 15, 2023"
+            android:layout_gravity="right|center"
+            android:gravity="right" />
+
+    </LinearLayout>
+</LinearLayout>
