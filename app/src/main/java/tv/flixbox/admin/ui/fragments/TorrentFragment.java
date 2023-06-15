@@ -46,27 +46,6 @@ public class TorrentFragment extends Fragment implements ResponseCallback {
         TorrentAdapter adapter = new TorrentAdapter(getContext());
         listView.setAdapter(adapter);
 
-        /*
-        listView.addOnScrollListener(new RecyclerView.OnScrollListener(){
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState){
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy){
-                super.onScrolled(recyclerView, dx, dy);
-
-                if(!isLoading){
-                    if(((GridLayoutManager) listView.getLayoutManager()).findLastCompletelyVisibleItemPosition() == adapter.getItemCount()-4){
-                        isLoading = true;
-                        call.request(adapter.size());
-                    }
-                }
-            }
-        });
-        */
-
         call.request();
     }
 
@@ -75,7 +54,6 @@ public class TorrentFragment extends Fragment implements ResponseCallback {
         handler.post(new Runnable(){
             @Override
             public void run(){
-                Log.e("info", j.toString());
                 ((TorrentAdapter) listView.getAdapter()).setJson(((JsonObject) j).getInteger("rpcVersion"), ((JsonObject) j).getJsonArray("torrents"));
 
                 /*
@@ -88,27 +66,29 @@ public class TorrentFragment extends Fragment implements ResponseCallback {
                 isLoading = false;
             }
         });
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                call.request();
+            }
+        }, 2000);
     }
 
     @Override
     public void onErrorResponse(JsonObject j){
         switch(j.getInteger("type")){
-            case 1:
-                /*
-                handler.post(new Runnable(){
-                    @Override
-                    public void run(){
-                        //((TorrentAdapter) listView.getAdapter()).stopShimmer();
-                    }
-                });
-                */
-                break;
-
             case 2:
                 ((FAppCompatActivity) getActivity()).onSignOut();
                 break;
 
             default:
+                handler.postDelayed(new Runnable(){
+                    @Override
+                    public void run(){
+                        call.request();
+                    }
+                }, 2000);
                 //throw new Exception(j.getJsonObject("result").getString("message"));
         }
     }
