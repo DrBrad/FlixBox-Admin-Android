@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="Notifications"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Allow Notifications"
+            app:summary="Customize in Settings"
+            app:defaultValue="true"
+            app:icon="@drawable/ic_notification" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Account"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            app:key="signout"
+            app:title="Sign Out"
+            app:icon="@drawable/ic_user" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Bugs / Errors"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            app:title="Report Bug"
+            app:icon="@drawable/ic_bugs" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Build"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            app:key="version"
+            app:title="App Version"
+            app:icon="@drawable/ic_build" />
+
+        <Preference
+            app:key="fengine"
+            app:title="FEngine Version"
+            app:icon="@drawable/ic_engine" />
+
+        <Preference
+            app:key="json"
+            app:title="Json Version"
+            app:icon="@drawable/ic_json" />
+
+    </PreferenceCategory>
+</PreferenceScreen>
