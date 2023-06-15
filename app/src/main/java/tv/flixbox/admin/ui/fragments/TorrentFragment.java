@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import tv.flixbox.admin.R;
+import tv.flixbox.admin.handler.RPCStatus;
 import tv.flixbox.admin.handler.calls.TorrentCall;
 import tv.flixbox.admin.handler.calls.ResponseCallback;
 import tv.flixbox.admin.libs.json.variables.JsonArray;
@@ -79,7 +80,7 @@ public class TorrentFragment extends Fragment implements ResponseCallback {
             @Override
             public void run(){
                 Log.e("info", j.toString());
-                ((TorrentAdapter) listView.getAdapter()).setJson(((JsonObject) j).getJsonArray("torrents"));
+                ((TorrentAdapter) listView.getAdapter()).setJson(((JsonObject) j).getInteger("rpcVersion"), ((JsonObject) j).getJsonArray("torrents"));
 
                 /*
                 View loader = getView().findViewById(R.id.loader);
