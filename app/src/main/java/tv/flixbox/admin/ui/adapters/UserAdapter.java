@@ -36,7 +36,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.RecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter holder, @SuppressLint("RecyclerView") int position){
-        //holder.title.setText(json.getJsonObject(position).getString("title"));
+        holder.name.setText(json.getJsonObject(position).getString("fname"));
+        holder.email.setText(json.getJsonObject(position).getString("email"));
+        //holder.role.setText(json.getJsonObject(position).getString("fname"));
+        holder.date.setText(json.getJsonObject(position).getString("created"));
         /*
         holder.description.setText((json.getJsonObject(position).getDouble("percentDone")*100)+"% complete");
         holder.status.setText(getStatusString(json.getJsonObject(position).getInteger("status")));
