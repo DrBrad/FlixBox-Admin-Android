@@ -37,7 +37,7 @@ public class UserCall extends FSocketCallback {
 
             switch(j.getInteger("type")){
                 case 0:
-                    callback.onSuccessResponse(j.getJsonObject("result"));
+                    callback.onSuccessResponse(j.getJsonArray("result"));
                     break;
 
                 default:

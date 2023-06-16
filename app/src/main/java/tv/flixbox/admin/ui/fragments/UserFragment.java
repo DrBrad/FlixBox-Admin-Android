@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+
 import tv.flixbox.admin.R;
 import tv.flixbox.admin.handler.calls.ResponseCallback;
 import tv.flixbox.admin.handler.calls.TorrentCall;
 import tv.flixbox.admin.handler.calls.UserCall;
+import tv.flixbox.admin.libs.json.variables.JsonArray;
 import tv.flixbox.admin.libs.json.variables.JsonObject;
 import tv.flixbox.admin.libs.json.variables.JsonVariable;
 import tv.flixbox.admin.ui.adapters.TorrentAdapter;
@@ -56,7 +59,7 @@ public class UserFragment extends Fragment implements ResponseCallback {
         handler.post(new Runnable(){
             @Override
             public void run(){
-                ((UserAdapter) listView.getAdapter()).setJson(((JsonObject) j).getJsonArray("torrents"));
+                ((UserAdapter) listView.getAdapter()).setJson(((JsonArray) j));
 
                 /*
                 View loader = getView().findViewById(R.id.loader);
