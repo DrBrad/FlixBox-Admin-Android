@@ -36,7 +36,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.RecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter holder, @SuppressLint("RecyclerView") int position){
-        holder.title.setText(json.getJsonObject(position).getString("title"));
+        //holder.title.setText(json.getJsonObject(position).getString("title"));
         /*
         holder.description.setText((json.getJsonObject(position).getDouble("percentDone")*100)+"% complete");
         holder.status.setText(getStatusString(json.getJsonObject(position).getInteger("status")));
@@ -46,17 +46,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.RecyclerViewAd
 
         holder.progress.setProgress((int) (json.getJsonObject(position).getDouble("percentDone")*1000));
         */
-    }
-
-    private String formatTime(int seconds){
-        if(seconds < 1){
-            return "Unknown";
-        }
-        double hours = Math.floor(seconds/3600);
-        double mins = Math.floor((seconds%3600)/60);
-        int remainingSeconds = seconds%60;
-
-        return hours+":"+mins+":"+remainingSeconds;
     }
 
     @Override
@@ -72,19 +61,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.RecyclerViewAd
     public static class RecyclerViewAdapter extends RecyclerView.ViewHolder {
 
         public View view;
-        public TextView title, description, status, peers, eta;
-        public ProgressBar progress;
+        public TextView name, email, role, date;
 
         public RecyclerViewAdapter(View view){
             super(view);
             this.view = view;
-            title = view.findViewById(R.id.title);
-            description = view.findViewById(R.id.description);
-            status = view.findViewById(R.id.status);
-            peers = view.findViewById(R.id.peers);
-            eta = view.findViewById(R.id.eta);
-
-            progress = view.findViewById(R.id.progress);
+            name = view.findViewById(R.id.name);
+            email = view.findViewById(R.id.email);
+            role = view.findViewById(R.id.role);
+            date = view.findViewById(R.id.date);
         }
     }
 }
